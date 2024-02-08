@@ -65,8 +65,10 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (queen.x === king.x || queen.y === king.y) return true;
+  if (Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)) return true;
+  return false;
 }
 
 /**
@@ -87,8 +89,12 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a === 0 || b === 0 || c === 0) return false;
+  if (a === b && a + b > c) return true;
+  if (b === c && b + c > a) return true;
+  if (a === c && a + c > b) return true;
+  return false;
 }
 
 /**
@@ -105,8 +111,35 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let number = num;
+  let result = '';
+  if (number >= 10) {
+    for (let i = 0; i < Math.floor(number / 10); ) {
+      result += 'X';
+      i += 1;
+    }
+    number -= Math.floor(number / 10) * 10;
+  }
+  if (number === 9) {
+    result += 'IX';
+    number -= 9;
+  } else if (number >= 5) {
+    for (let i = 0; i < Math.floor(number / 5); ) {
+      result += 'V';
+      i += 1;
+    }
+    number -= Math.floor(number / 5) * 5;
+  }
+  if (number === 4) {
+    result += 'IV';
+  } else {
+    for (let i = 0; i < number; ) {
+      result += 'I';
+      i += 1;
+    }
+  }
+  return result;
 }
 
 /**
